@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2: Daily Routine & Time — Student Workbook</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;color:#1a202c;line-height:1.7}
+.header{background:linear-gradient(135deg,#1a365d,#2c5282);color:white;padding:35px 20px;text-align:center}
+.header img{width:70px;height:70px;border-radius:50%;background:white;padding:3px;margin-bottom:15px;box-shadow:0 4px 15px rgba(0,0,0,0.2)}
+.header h1{font-size:1.7rem;margin-bottom:6px}
+.header p{opacity:0.9;font-size:0.95rem}
+.student-info{background:white;max-width:800px;margin:-15px auto 25px;padding:20px 25px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.08);display:flex;gap:15px;flex-wrap:wrap;align-items:center}
+.student-info label{font-weight:600;color:#2d3748;font-size:0.9rem}
+.student-info input{padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;font-size:0.95rem;min-width:180px}
+.student-info input:focus{outline:none;border-color:#3182ce}
+.container{max-width:800px;margin:0 auto;padding:0 20px 50px}
+.progress-bar{background:white;border-radius:12px;padding:18px 22px;margin-bottom:25px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.progress-bar h3{font-size:0.95rem;color:#4a5568;margin-bottom:10px;display:flex;justify-content:space-between}
+.progress-track{height:10px;background:#e2e8f0;border-radius:5px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#3182ce,#2c5282);border-radius:5px;transition:width 0.5s ease;width:0%}
+.score-display{font-size:1.4rem;font-weight:700;color:#2c5282}
+.exercise{background:white;border-radius:12px;padding:28px;margin-bottom:22px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-left:4px solid #3182ce}
+.exercise.completed{border-left-color:#38a169}
+.exercise-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:8px}
+.exercise-title{font-size:1.1rem;color:#1a365d;font-weight:600}
+.exercise-score{background:#edf2f7;padding:5px 12px;border-radius:20px;font-size:0.8rem;font-weight:600;color:#4a5568}
+.exercise-score.correct{background:#c6f6d5;color:#22543d}
+.exercise-score.wrong{background:#fed7d7;color:#742a2a}
+.question{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid #edf2f7}
+.question:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.question-text{font-weight:500;margin-bottom:10px;color:#2d3748}
+.options{display:flex;flex-direction:column;gap:8px}
+.option{display:flex;align-items:center;gap:12px;padding:11px 15px;background:#f7fafc;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:all 0.2s}
+.option:hover{background:#edf2f7}
+.option.selected{border-color:#3182ce;background:#ebf8ff}
+.option.correct{border-color:#38a169;background:#f0fff4}
+.option.wrong{border-color:#e53e3e;background:#fff5f5}
+.option input[type="radio"]{width:18px;height:18px;accent-color:#3182ce}
+.fill-blank{display:inline-block;min-width:110px;padding:7px 10px;border:2px solid #e2e8f0;border-radius:6px;font-size:0.95rem;margin:0 3px}
+.fill-blank:focus{outline:none;border-color:#3182ce}
+.fill-blank.correct{border-color:#38a169;background:#f0fff4}
+.fill-blank.wrong{border-color:#e53e3e;background:#fff5f5}
+.btn{padding:11px 28px;border:none;border-radius:8px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.btn-primary{background:linear-gradient(135deg,#3182ce,#2c5282);color:white}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(49,130,206,0.3)}
+.btn-secondary{background:#edf2f7;color:#4a5568;margin-left:10px}
+.btn-secondary:hover{background:#e2e8f0}
+.feedback{margin-top:12px;padding:14px;border-radius:8px;display:none;font-size:0.95rem}
+.feedback.show{display:block}
+.feedback.correct{background:#f0fff4;color:#22543d;border:1px solid #9ae6b4}
+.feedback.wrong{background:#fff5f5;color:#742a2a;border:1px solid #feb2b2}
+.action-bar{display:flex;justify-content:center;gap:12px;margin-top:25px;padding:22px;background:white;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.05);flex-wrap:wrap}
+.final-score{text-align:center;padding:35px;background:linear-gradient(135deg,#1a365d,#2c5282);color:white;border-radius:12px;margin-bottom:25px;display:none}
+.final-score.show{display:block}
+.final-score h2{font-size:1.8rem;margin-bottom:8px}
+.final-score .big-number{font-size:3rem;font-weight:700}
+.match-item{padding:10px 14px;background:#f7fafc;border-radius:6px;border:2px solid transparent;cursor:pointer;text-align:center;font-size:0.95rem}
+.match-item:hover{background:#edf2f7}
+.match-item.selected{border-color:#3182ce;background:#ebf8ff}
+.match-item.matched{border-color:#38a169;background:#f0fff4}
+.dialogue-box{background:#f7fafc;border-radius:8px;padding:18px;margin:12px 0;font-style:italic;line-height:2}
+.dialogue-box .speaker{font-weight:600;color:#2c5282;font-style:normal}
+.back-link{display:inline-block;margin-bottom:15px;color:#3182ce;text-decoration:none;font-weight:500;font-size:0.9rem}
+footer{text-align:center;padding:25px;color:#718096;font-size:0.8rem}
+@media print{
+.btn,.action-bar{display:none}
+body{background:white;color:#000}
+.exercise{box-shadow:none;border:1px solid #ccc;margin-bottom:15px;page-break-inside:avoid}
+.header{background:#1a365d!important;color:white!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.student-info{box-shadow:none;border:1px solid #ccc}
+.fill-blank{border:1px solid #999;background:#f9f9f9;min-width:80px}
+.option{background:#f9f9f9;border:1px solid #ddd}
+.match-item{background:#f9f9f9;border:1px solid #ddd}
+.dialogue-box{background:#f9f9f9;border:1px solid #ddd}
+.feedback{display:block!important;border:1px solid #ccc;background:#f9f9f9!important;color:#000!important}
+.progress-bar{box-shadow:none;border:1px solid #ccc}
+.final-score{display:block!important;background:#1a365d!important;color:white!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+footer{border-top:1px solid #ccc}
+}
+@media(max-width:600px){.student-info{flex-direction:column}.exercise{padding:20px}}
+</style>
+<base target="_blank">
+</head>
+<body>
+<div class="header">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWAAAAFICAYAAABuniQXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAGHaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQg[...]"></img>
+<h1>📘 Week 2: Daily Routine & Time</h1>
+<p>French Level 1 — Student Workbook</p>
+</div>
+<div class="student-info">
+<label for="studentName">👤 Full Name:</label>
+<input type="text" id="studentName" placeholder="Enter your full name" onchange="saveData()">
+<label for="studentEmail">📧 Email:</label>
+<input type="email" id="studentEmail" placeholder="Enter your email" onchange="saveData()">
+<label for="studentDate">📅 Date:</label>
+<input type="date" id="studentDate" onchange="saveData()">
+</div>
+<div class="container">
+<a href="French Level1 landing.html" class="back-link">← Back to Level 1</a>
+<div class="progress-bar">
+<h3>Your Progress <span class="score-display" id="totalScore">0%</span></h3>
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+<div class="final-score" id="finalScore">
+<h2>🎉 Well Done!</h2>
+<div class="big-number" id="finalPercent">0%</div>
+<p id="finalMessage">Keep practicing!</p>
+</div>
+<div class="exercise" id="ex1">
+<div class="exercise-header">
+<span class="exercise-title">Exercise 1: Telling the Time</span>
+<span class="exercise-score" id="score1">Not started</span>
+</div>
+<div class="question">
+<p class="question-text">1. What is the correct way to say "It's 7:30" in French?</p>
+<div class="options">
+<label class="option" onclick="selectOption(this,'A','C','q1')"><input type="radio" name="q1"> A. Il est sept heures</label>
+<label class="option" onclick="selectOption(this,'B','C','q1')"><input type="radio" name="q1"> B. Il est sept heures vingt</label>
+<label class="option" onclick="selectOption(this,'C','C','q1')"><input type="radio" name="q1"> C. Il est sept heures et demie</label>
+</div>
+</div>
+<div class="question">
+<p class="question-text">2. How do you ask "What time is it?"</p>
+<div class="options">
+<label class="option" onclick="selectOption(this,'A','A','q2')"><input type="radio" name="q2"> A. Quelle heure est-il?</label>
+<label class="option" onclick="selectOption(this,'B','A','q2')"><input type="radio" name="q2"> B. Comment t'appelles-tu?</label>
+<label class="option" onclick="selectOption(this,'C','A','q2')"><input type="radio" name="q2"> C. Où est la gare?</label>
+</div>
+</div>
+</div>
+<div class="exercise" id="ex2">
+<div class="exercise-header">
+<span class="exercise-title">Exercise 2: Daily Routine Verbs</span>
+<span class="exercise-score" id="score2">Not started</span>
+</div>
+<div class="question">
+<p class="question-text">Fill in the blanks with the correct present-tense verb (le matin / chaque jour):</p>
+<p style="margin-top:12px;line-height:2.4">
+1. Je <input type="text" class="fill-blank" id="fb1" data-answer="me lève"> à 7h.<br>
+2. Il <input type="text" class="fill-blank" id="fb2" data-answer="se brosse"> les dents.<br>
+3. Nous <input type="text" class="fill-blank" id="fb3" data-answer="déjeunons"> ensemble.<br>
+4. Elle <input type="text" class="fill-blank" id="fb4" data-answer="va"> au travail.<br>
+5. Tu <input type="text" class="fill-blank" id="fb5" data-answer="regardes"> la télévision le soir.<br>
+</p>
+</div>
+<div class="feedback" id="feedback2"></div>
+</div>
+<div class="exercise" id="ex3">
+<div class="exercise-header">
+<span class="exercise-title">Exercise 3: Match the Time Expressions</span>
+<span class="exercise-score" id="score3">Not started</span>
+</div>
+<p class="question-text">Match the French phrase with the English meaning:</p>
+<div style="margin-top:15px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:15px">
+<div>
+<div class="match-item" data-match="1" onclick="selectMatch(this)">le matin</div>
+<div class="match-item" data-match="2" onclick="selectMatch(this)">l'après-midi</div>
+<div class="match-item" data-match="3" onclick="selectMatch(this)">le soir</div>
+<div class="match-item" data-match="4" onclick="selectMatch(this)">tous les jours</div>
+<div class="match-item" data-match="5" onclick="selectMatch(this)">une fois par semaine</div>
+</div>
+<div>
+<div class="match-item" data-match="5" onclick="selectMatch(this)">once a week</div>
+<div class="match-item" data-match="1" onclick="selectMatch(this)">in the morning</div>
+<div class="match-item" data-match="4" onclick="selectMatch(this)">every day</div>
+<div class="match-item" data-match="2" onclick="selectMatch(this)">in the afternoon</div>
+<div class="match-item" data-match="3" onclick="selectMatch(this)">in the evening</div>
+</div>
+</div>
+</div>
+<div class="feedback" id="feedback3"></div>
+</div>
+<div class="exercise" id="ex4">
+<div class="exercise-header">
+<span class="exercise-title">Exercise 4: Translate</span>
+<span class="exercise-score" id="score4">Not started</span>
+</div>
+<div class="question">
+<p class="question-text">Translate these sentences into French:</p>
+<p style="margin-top:12px;line-height:2.4">
+1. I wake up at 6 o'clock. → <input type="text" class="fill-blank" id="tr1" data-answer="Je me réveille à six heures" style="min-width:200px"><br>
+2. She goes to school every day. → <input type="text" class="fill-blank" id="tr2" data-answer="Elle va à l'école tous les jours" style="min-width:200px"><br>
+3. We have breakfast at 8:00. → <input type="text" class="fill-blank" id="tr3" data-answer="Nous prenons le petit déjeuner à huit heures" style="min-width:200px"><br>
+</p>
+</div>
+<div class="feedback" id="feedback4"></div>
+</div>
+<div class="exercise" id="ex5">
+<div class="exercise-header">
+<span class="exercise-title">Exercise 5: Daily Routine Dialogue</span>
+<span class="exercise-score" id="score5">Not started</span>
+</div>
+<div class="question">
+<p class="question-text">Complete the dialogue with the verbs in the correct present form:</p>
+<div class="dialogue-box">
+<p><span class="speaker">Paul:</span> Bonjour! Tu <input type="text" class="fill-blank" id="d1" data-answer="te lèves"> tôt le matin?</p>
+<p><span class="speaker">Anna:</span> Oui, je <input type="text" class="fill-blank" id="d2" data-answer="me lève"> à 6h30 et je <input type="text" class="fill-blank" id="d3" data-answer="prends"> mon petit déjeuner.</p>
+<p><span class="speaker">Paul:</span> Et puis tu <input type="text" class="fill-blank" id="d4" data-answer="pars"> au travail?</p>
+</div>
+</div>
+<div class="feedback" id="feedback5"></div>
+</div>
+<div class="action-bar">
+<button class="btn btn-primary" onclick="checkAll()">✓ Check All Answers</button>
+<button class="btn btn-secondary" onclick="resetAll()">↺ Reset</button>
+<button class="btn btn-secondary" onclick="window.print()">🖨 Print</button>
+<button class="btn btn-secondary" onclick="downloadPDF()">📥 Download as PDF</button>
+</div>
+</div>
+<footer>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWAAAAFICAYAAABuniQXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAGHaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQ[...]"></img>
+© Anglo-Congolese Association — French Level 1, Week 2<br>
+<small>Your progress is saved automatically. Works offline too!</small>
+</footer>
+<script>
+let scores={ex1:0,ex2:0,ex3:0,ex4:0,ex5:0};
+let selectedMatch=null;
+let matchedPairs=0;
+const totalPairs=5;
+
+window.onload=function(){
+  const saved=localStorage.getItem('workbook_w2_data');
+  if(saved){
+    const data=JSON.parse(saved);
+    document.getElementById('studentName').value=data.name||'';
+    document.getElementById('studentEmail').value=data.email||'';
+    document.getElementById('studentDate').value=data.date||'';
+  }
+  updateProgress();
+};
+
+function saveData(){
+  const name=document.getElementById('studentName').value;
+  const email=document.getElementById('studentEmail').value;
+  const date=document.getElementById('studentDate').value;
+  localStorage.setItem('workbook_w2_data',JSON.stringify({name,email,date}));
+}
+
+function selectOption(el,sel,cor,qName){
+  const c=el.parentElement;
+  c.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked=true;
+}
+
+function checkExercise1(){
+  let correct=0;
+  const answers={q1:'C',q2:'A'};
+  for(let q in answers){
+    const selected=document.querySelector('input[name="'+q+'"]:checked');
+    const options=document.querySelectorAll('input[name="'+q+'"]');
+    options.forEach((opt,idx)=>{
+      const label=opt.closest('.option');
+      const val=['A','B','C'][idx];
+      if(val===answers[q])label.classList.add('correct');
+      else if(opt.checked)label.classList.add('wrong');
+    });
+    if(selected){
+      const val=['A','B','C'][[...options].indexOf(selected)];
+      if(val===answers[q])correct++;
+    }
+  }
+  const score=Math.round((correct/2)*100);
+  scores.ex1=score;
+  showFeedback('feedback1',score,2,correct);
+  updateScoreDisplay('score1',score);
+  document.getElementById('ex1').classList.add('completed');
+}
+
+function checkExercise2(){
+  let correct=0;
+  const blanks=['fb1','fb2','fb3','fb4','fb5'];
+  blanks.forEach(id=>{
+    const input=document.getElementById(id);
+    const answer=input.dataset.answer.toLowerCase().trim();
+    const value=input.value.toLowerCase().trim();
+    if(value===answer){input.classList.add('correct');correct++;}
+    else{input.classList.add('wrong');}
+  });
+  const score=Math.round((correct/5)*100);
+  scores.ex2=score;
+  showFeedback('feedback2',score,5,correct,'Answers: me lève, se brosse, déjeunons, va, regardes');
+  updateScoreDisplay('score2',score);
+  document.getElementById('ex2').classList.add('completed');
+}
+
+function selectMatch(el){
+  if(el.classList.contains('matched'))return;
+  if(!selectedMatch){selectedMatch=el;el.classList.add('selected');}
+  else{
+    if(selectedMatch.dataset.match===el.dataset.match&&selectedMatch!==el){
+      selectedMatch.classList.add('matched');
+      el.classList.add('matched');
+      matchedPairs++;
+    }
+    selectedMatch.classList.remove('selected');
+    selectedMatch=null;
+  }
+  if(matchedPairs===totalPairs){
+    scores.ex3=100;
+    showFeedback('feedback3',100,totalPairs,totalPairs,'Perfect! All pairs matched correctly.');
+    updateScoreDisplay('score3',100);
+    document.getElementById('ex3').classList.add('completed');
+  }
+}
+
+function checkExercise4(){
+  let correct=0;
+  const blanks=['tr1','tr2','tr3'];
+  const acceptable={
+    'tr1':["je me réveille à six heures","je me reveille a six heures","je me réveille à 6h","je me reveille a 6h"],
+    'tr2':["elle va à l'école tous les jours","elle va a l'ecole tous les jours","elle va a l ecole tous les jours"],
+    'tr3':["nous prenons le petit déjeuner à huit heures","nous prenons le petit dejeuner a huit heures"]
+  };
+  blanks.forEach(id=>{
+    const input=document.getElementById(id);
+    const value=input.value.toLowerCase().trim();
+    const answers=acceptable[id];
+    if(answers.some(a=>value.includes(a))){input.classList.add('correct');correct++;}
+    else{input.classList.add('wrong');}
+  });
+  const score=Math.round((correct/3)*100);
+  scores.ex4=score;
+  showFeedback('feedback4',score,3,correct,'Acceptable answers listed');
+  updateScoreDisplay('score4',score);
+  document.getElementById('ex4').classList.add('completed');
+}
+
+function checkExercise5(){
+  let correct=0;
+  const blanks=['d1','d2','d3','d4'];
+  const acceptable={
+    'd1':['te lèves','te leves'],
+    'd2':['me lève','me leve','me leve'],
+    'd3':['prends','prends'],
+    'd4':['pars','pars']
+  };
+  blanks.forEach(id=>{
+    const input=document.getElementById(id);
+    const value=input.value.toLowerCase().trim();
+    const answers=acceptable[id];
+    if(answers.some(a=>value===a)){input.classList.add('correct');correct++;}
+    else{input.classList.add('wrong');}
+  });
+  const score=Math.round((correct/4)*100);
+  scores.ex5=score;
+  showFeedback('feedback5',score,4,correct,'Check verb forms');
+  updateScoreDisplay('score5',score);
+  document.getElementById('ex5').classList.add('completed');
+}
+
+function showFeedback(id,score,total,correct,extraMsg){
+  const el=document.getElementById(id);
+  const isPass=score>=70;
+  el.className='feedback show '+(isPass?'correct':'wrong');
+  el.innerHTML='<strong>'+(isPass?'✓':'✗')+' '+score+'%</strong> — '+correct+'/'+total+' correct.'+(extraMsg?'<br><small>'+extraMsg+'</small>':'');
+}
+
+function updateScoreDisplay(id,score){
+  const el=document.getElementById(id);
+  el.textContent=score+'%';
+  el.className='exercise-score '+(score>=70?'correct':'wrong');
+}
+
+function checkAll(){
+  checkExercise1();checkExercise2();
+  if(matchedPairs<totalPairs){
+    showFeedback('feedback3',Math.round((matchedPairs/totalPairs)*100),totalPairs,matchedPairs,'Matched: '+matchedPairs+'/'+totalPairs+' pairs');
+    updateScoreDisplay('score3',Math.round((matchedPairs/totalPairs)*100));
+  }
+  checkExercise4();checkExercise5();
+  updateProgress();
+  const total=(scores.ex1+scores.ex2+scores.ex3+scores.ex4+scores.ex5)/5;
+  document.getElementById('finalScore').classList.add('show');
+  document.getElementById('finalPercent').textContent=Math.round(total)+'%';
+  let msg='';
+  if(total>=90)msg='Outstanding work!';
+  else if(total>=70)msg='Great job! Keep it up!';
+  else msg="Keep practicing! You'll get there!";
+  document.getElementById('finalMessage').textContent=msg;
+  saveData();
+  localStorage.setItem('workbook_w2_scores',JSON.stringify({scores:scores,total:Math.round(total),name:document.getElementById('studentName').value}));
+}
+
+function updateProgress(){
+  const total=(scores.ex1+scores.ex2+scores.ex3+scores.ex4+scores.ex5)/5;
+  document.getElementById('progressFill').style.width=total+'%';
+  document.getElementById('totalScore').textContent=Math.round(total)+'%';
+}
+
+function resetAll(){
+  if(!confirm('Reset all answers? Your progress will be cleared.'))return;
+  document.querySelectorAll('.option').forEach(el=>{el.classList.remove('selected','correct','wrong');el.querySelector('input').checked=false;});
+  document.querySelectorAll('.fill-blank').forEach(el=>{el.value='';el.classList.remove('correct','wrong');});
+  document.querySelectorAll('.match-item').forEach(el=>{el.classList.remove('selected','matched');});
+  document.querySelectorAll('.feedback').forEach(el=>el.classList.remove('show'));
+  document.querySelectorAll('.exercise').forEach(el=>el.classList.remove('completed'));
+  document.querySelectorAll('.exercise-score').forEach(el=>{el.textContent='Not started';el.className='exercise-score';});
+  scores={ex1:0,ex2:0,ex3:0,ex4:0,ex5:0};
+  matchedPairs=0;selectedMatch=null;
+  document.getElementById('finalScore').classList.remove('show');
+  updateProgress();
+  localStorage.removeItem('workbook_w2_scores');
+}
+
+function downloadPDF(){
+  if(scores.ex1===0 && scores.ex2===0 && scores.ex3===0 && scores.ex4===0 && scores.ex5===0){
+    if(confirm('You have not checked your answers yet. Check them first so they appear in the PDF?')){
+      checkAll();
+      setTimeout(function(){window.print();},800);
+      return;
+    }
+  }
+  window.print();
+}
+</script>
+</body>
+</html>
