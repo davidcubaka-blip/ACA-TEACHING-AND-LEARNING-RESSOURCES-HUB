@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 2 Flashcards — French Level 1</title>
+<style>
+:root{--bg:#f5f7fa;--card:#fff;--accent:#3182ce;--muted:#4a5568}
+*{box-sizing:border-box}
+body{font-family:Segoe UI,system-ui,sans-serif;background:var(--bg);color:#1a202c;margin:0}
+.header{background:linear-gradient(135deg,#1a365d,#2c5282);color:#fff;padding:20px;text-align:center}
+.container{max-width:900px;margin:22px auto;padding:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.card{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06);text-align:center}
+.word{font-size:1.05rem;font-weight:700;color:var(--accent);margin-bottom:8px}
+.meaning{color:var(--muted);font-size:0.95rem}
+.toolbar{display:flex;gap:8px;justify-content:center;margin:14px 0}
+.btn{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-weight:600}
+.btn.alt{background:#6b46c1}
+.controls{display:flex;gap:8px;justify-content:center;margin-top:12px}
+@media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<base target="_blank">
+</head>
+<body>
+<div class="header"><h1>Week 2 — Vocabulary Flashcards</h1><p style="opacity:.9;margin:6px 0">Les informations personnelles · 20+ words</p></div>
+<div class="container">
+  <div style="text-align:center;margin-bottom:12px"><button class="btn" onclick="shuffle()">Shuffle</button> <button class="btn alt" onclick="toggleStudy()">Toggle Study Mode</button> <button class="btn" onclick="window.print()">Print</button></div>
+
+  <div id="cards" class="grid"></div>
+  <div class="controls"><small style="color:#718096">Tip: Click any card to flip it and reveal the English meaning.</small></div>
+</div>
+<script>
+const words=[
+  {fr:'zéro',en:'zero'},{fr:'un / une',en:'one'},{fr:'deux',en:'two'},{fr:'trois',en:'three'},{fr:'quatre',en:'four'},
+  {fr:'cinq',en:'five'},{fr:'six',en:'six'},{fr:'sept',en:'seven'},{fr:'huit',en:'eight'},{fr:'neuf',en:'nine'},
+  {fr:'dix',en:'ten'},{fr:'onze',en:'eleven'},{fr:'douze',en:'twelve'},{fr:'treize',en:'thirteen'},{fr:'quatorze',en:'fourteen'},
+  {fr:'quinze',en:'fifteen'},{fr:'seize',en:'sixteen'},{fr:'dix-sept',en:'seventeen'},{fr:'dix-huit',en:'eighteen'},{fr:'dix-neuf',en:'nineteen'},{fr:'vingt',en:'twenty'}
+];
+let study=false;
+function makeCard(w,i){
+  const el=document.createElement('div');el.className='card';el.innerHTML=`<div class="word">${w.fr}</div><div class="meaning" style="display:${study?'block':'none'}">${w.en}</div>`;
+  el.onclick=()=>{const m=el.querySelector('.meaning');m.style.display=m.style.display==='none'?'block':'none'};
+  return el;
+}
+function render(){const c=document.getElementById('cards');c.innerHTML='';words.forEach((w,i)=>c.appendChild(makeCard(w,i)));}
+function shuffle(){for(let i=words.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[words[i],words[j]]=[words[j],words[i]]}render()}
+function toggleStudy(){study=!study;document.querySelectorAll('.meaning').forEach(m=>m.style.display=study?'block':'none')}
+render();
+</script>
+</body>
+</html>
