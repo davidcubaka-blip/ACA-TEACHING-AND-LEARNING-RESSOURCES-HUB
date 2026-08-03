@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 Listening — Le formulaire</title>
+<style>
+:root{--primary:#2563eb;--bg:#f8fafc;--card:#fff;--muted:#64748b;--border:#e2e8f0}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:#1e293b}
+.header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:white;padding:20px;text-align:center}
+.container{max-width:720px;margin:18px auto;padding:16px}
+.scene{background:#fef3c7;border-left:4px solid #f59e0b;padding:12px;border-radius:8px;margin-bottom:14px}
+.dialogue-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.speaker{min-width:110px;font-weight:700;color:var(--primary);font-size:13px;padding-top:6px}
+.bubble{flex:1;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;position:relative;cursor:pointer}
+.bubble .fr{font-size:15px;margin-bottom:6px}
+.bubble .en{font-size:13px;color:var(--muted);font-style:italic}
+.play{position:absolute;right:10px;top:10px;width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center}
+.controls{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.btn{padding:8px 12px;border-radius:8px;border:none;background:var(--primary);color:#fff;cursor:pointer;font-weight:700}
+.questions{margin-top:16px;background:white;padding:12px;border-radius:10px;border:1px solid var(--border)}
+.q-item{padding:8px 0;border-bottom:1px solid #f1f5f9}
+.q-item:last-child{border-bottom:none}
+</style>
+</head>
+<body>
+<div class="header"><h1>Week 2 — Listening: Le formulaire</h1><p style="opacity:.9;margin:6px 0">Short dialogue — practice spelling and numbers</p></div>
+<div class="container">
+  <div class="scene"><strong>Scene:</strong> A young man filling in a library registration form in Kinshasa. The librarian asks questions; close-ups of the form fields.</div>
+
+  <div class="dialogue-row">
+    <div class="speaker">Bibliothécaire</div>
+    <div class="bubble" onclick="speak(0,this)"><div class="fr">Bonjour Monsieur, bienvenue à la bibliothèque. Votre nom, s'il vous plaît ?</div><div class="en">Hello Sir, welcome to the library. Your name, please?</div><div class="play">▶</div></div>
+  </div>
+
+  <div class="dialogue-row">
+    <div class="speaker">Jonathan</div>
+    <div class="bubble" onclick="speak(1,this)"><div class="fr">Je m'appelle Jonathan Kasongo.</div><div class="en">My name is Jonathan Kasongo.</div><div class="play">▶</div></div>
+  </div>
+
+  <div class="dialogue-row">
+    <div class="speaker">Bibliothécaire</div>
+    <div class="bubble" onclick="speak(2,this)"><div class="fr">Kasongo… Vous pouvez épeler ?</div><div class="en">Kasongo… Can you spell that?</div><div class="play">▶</div></div>
+  </div>
+
+  <div class="dialogue-row">
+    <div class="speaker">Jonathan</div>
+    <div class="bubble" onclick="speak(3,this)"><div class="fr">K-A-S-O-N-G-O.</div><div class="en">K-A-S-O-N-G-O.</div><div class="play">▶</div></div>
+  </div>
+
+  <div class="dialogue-row">
+    <div class="speaker">Bibliothécaire</div>
+    <div class="bubble" onclick="speak(4,this)"><div class="fr">Merci. Quel âge avez-vous ?</div><div class="en">Thank you. How old are you?</div><div class="play">▶</div></div>
+  </div>
+
+  <div class="dialogue-row">
+    <div class="speaker">Jonathan</div>
+    <div class="bubble" onclick="speak(5,this)"><div class="fr">J'ai vingt-deux ans.</div><div class="en">I am twenty-two years old.</div><div class="play">▶</div></div>
+  </div>
+
+  <div class="dialogue-row">
+    <div class="speaker">Bibliothécaire</div>
+    <div class="bubble" onclick="speak(6,this)"><div class="fr">Vous êtes étudiant ?</div><div class="en">Are you a student?</div><div class="play">▶</div></div>
+  </div>
+
+  <div class="dialogue-row">
+    <div class="speaker">Jonathan</div>
+    <div class="bubble" onclick="speak(7,this)"><div class="fr">Oui, je suis étudiant à l'Université de Kinshasa.</div><div class="en">Yes, I am a student at the University of Kinshasa.</div><div class="play">▶</div></div>
+  </div>
+
+  <div class="dialogue-row">
+    <div class="speaker">Bibliothécaire</div>
+    <div class="bubble" onclick="speak(8,this)"><div class="fr">Très bien. Et votre numéro de téléphone ?</div><div class="en">Very good. And your telephone number?</div><div class="play">▶</div></div>
+  </div>
+
+  <div class="dialogue-row">
+    <div class="speaker">Jonathan</div>
+    <div class="bubble" onclick="speak(9,this)"><div class="fr">Zéro huit, quinze, vingt-trois, quarante.</div><div class="en">08 15 23 40.</div><div class="play">▶</div></div>
+  </div>
+
+  <div class="dialogue-row">
+    <div class="speaker">Bibliothécaire</div>
+    <div class="bubble" onclick="speak(10,this)"><div class="fr">Parfait, voici votre carte. Bienvenue !</div><div class="en">Perfect, here is your card. Welcome!</div><div class="play">▶</div></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" onclick="playAll()">Play All</button>
+    <button class="btn" onclick="stopAll()">Stop</button>
+    <select id="speed" onchange="updateSpeed()" style="padding:8px;border-radius:8px;border:1px solid var(--border)">
+      <option value="0.85">0.85x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.15">1.15x</option>
+    </select>
+  </div>
+
+  <div class="questions">
+    <h3 style="margin-top:0;color:#2563eb">Comprehension Questions</h3>
+    <div class="q-item">1. What is the man's family name? (Kasanda / Kasongo / Kabongo)</div>
+    <div class="q-item">2. How old is he? (20 / 21 / 22)</div>
+    <div class="q-item">3. Where does he study? (University of Kinshasa / University of Goma / He does not study)</div>
+    <div class="q-item">4. What is the first pair of digits in his phone number? (09 / 08 / 07)</div>
+    <div class="q-item">5. What does he receive at the end? (A book / A library card / A form)</div>
+  </div>
+</div>
+<script>
+const lines=[
+  "Bonjour Monsieur, bienvenue à la bibliothèque. Votre nom, s'il vous plaît ?",
+  "Je m'appelle Jonathan Kasongo.",
+  "Kasongo… Vous pouvez épeler ?",
+  "K-A-S-O-N-G-O.",
+  "Merci. Quel âge avez-vous ?",
+  "J'ai vingt-deux ans.",
+  "Vous êtes étudiant ?",
+  "Oui, je suis étudiant à l'Université de Kinshasa.",
+  "Très bien. Et votre numéro de téléphone ?",
+  "Zéro huit, quinze, vingt-trois, quarante.",
+  "Parfait, voici votre carte. Bienvenue !"
+];
+let idx=0,queue=[];let playingAll=false;
+function speak(i,el){stopAll();const u=new SpeechSynthesisUtterance(lines[i]);u.lang='fr-FR';u.rate=parseFloat(document.getElementById('speed').value);const voices=speechSynthesis.getVoices();const fr=voices.find(v=>v.lang&&v.lang.startsWith('fr'));if(fr)u.voice=fr;u.onstart=()=>el.classList.add('playing');u.onend=()=>el.classList.remove('playing');speechSynthesis.speak(u)}
+function playAll(){stopAll();playingAll=true;queue=lines.map((l,i)=>i);playNext()}
+function playNext(){if(!playingAll||queue.length===0){playingAll=false;return}const i=queue.shift();const b=document.querySelectorAll('.bubble')[i];const u=new SpeechSynthesisUtterance(lines[i]);u.lang='fr-FR';u.rate=parseFloat(document.getElementById('speed').value);const voices=speechSynthesis.getVoices();const fr=voices.find(v=>v.lang&&v.lang.startsWith('fr'));if(fr)u.voice=fr;u.onstart=()=>b.classList.add('playing');u.onend=()=>{b.classList.remove('playing');setTimeout(playNext,360)};speechSynthesis.speak(u)}
+function stopAll(){playingAll=false;queue=[];speechSynthesis.cancel();document.querySelectorAll('.bubble').forEach(b=>b.classList.remove('playing'))}
+function updateSpeed(){/* toast optional */}
+speechSynthesis.getVoices();if(speechSynthesis.onvoiceschanged!==undefined)speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();
+</script>
+</body>
+</html>
