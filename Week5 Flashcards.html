@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Week 5 Flashcards — Directions</title>
+<style>body{font-family:Segoe UI,system-ui,sans-serif;background:#f8fafc;margin:0;color:#1e293b}.header{background:linear-gradient(135deg,#1a365d,#2c5282);color:#fff;padding:18px;text-align:center}.container{max-width:900px;margin:18px auto;padding:18px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}.card{background:#fff;padding:12px;border-radius:8px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,0.06)}.word{font-weight:700;color:#2c5282}</style>
+</head>
+<body>
+<div class="header"><h1>Week 5 — Flashcards</h1></div>
+<div class="container"><div class="grid" id="g"></div></div>
+<script>const w=['la rue','l\'avenue','le carrefour','le rond-point','la gare','l\'aéroport','l\'hôpital','l\'école','l\'église','la mosquée','la banque','la pharmacie','le restaurant','l\'hôtel','le marché central','à gauche','à droite','tout droit','près de','Où est?'];const g=document.getElementById('g');w.forEach(x=>{const d=document.createElement('div');d.className='card';d.innerHTML=`<div class='word'>${x}</div><div class='meaning' style='display:none'>English</div>`;d.onclick=()=>{const m=d.querySelector('.meaning');m.style.display=m.style.display==='none'?'block':'none'};g.appendChild(d)});</script>
+</body>
+</html>

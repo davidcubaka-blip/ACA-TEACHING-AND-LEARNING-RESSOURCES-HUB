@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 4 Flashcards — Food & Market</title>
+<style>body{font-family:Segoe UI,system-ui,sans-serif;background:#f8fafc;margin:0} .header{background:linear-gradient(135deg,#1a365d,#2c5282);color:#fff;padding:20px;text-align:center} .container{max-width:900px;margin:18px auto;padding:18px} .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px} .card{background:#fff;padding:12px;border-radius:8px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,0.06)} .word{font-weight:700;color:#2c5282;margin-bottom:6px}.meaning{color:#64748b}.btn{display:inline-block;padding:8px 12px;border-radius:8px;background:#3182ce;color:#fff;text-decoration:none}</style>
+</head>
+<body>
+<div class="header"><h1>Week 4 — Flashcards</h1><p>La nourriture et les courses</p></div>
+<div class="container">
+<div style="text-align:center;margin-bottom:12px"><button class="btn" onclick="toggle()">Toggle meanings</button> <button class="btn" onclick="window.print()">Print</button></div>
+<div class="grid" id="grid"></div>
+</div>
+<script>
+const words=['le pain','le riz','l\'eau','le lait','le café','le thé','le poisson','la viande','le poulet','les légumes','les fruits','la banane','la tomate','l\'oignon','le sucre','le sel','l\'huile','le marché','la boutique','Combien ça coûte ?'];
+let show=false;function render(){const g=document.getElementById('grid');g.innerHTML='';words.forEach(w=>{const c=document.createElement('div');c.className='card';c.innerHTML=`<div class='word'>${w}</div><div class='meaning' style='display:${show?'block':'none'}'>English meaning</div>`;c.onclick=()=>{const m=c.querySelector('.meaning');m.style.display=m.style.display==='none'?'block':'none'};g.appendChild(c)})}
+function toggle(){show=!show;render()}render();
+</script>
+</body>
+</html>
