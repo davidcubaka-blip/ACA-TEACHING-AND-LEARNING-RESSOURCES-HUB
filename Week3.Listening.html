@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 3 Listening — La journée de Maman Rose</title>
+<style>:root{--primary:#2563eb;--bg:#f8fafc;--card:#fff;--muted:#64748b;--border:#e2e8f0}*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--text)}.header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:white;padding:20px;text-align:center}.container{max-width:720px;margin:18px auto;padding:16px}.scene{background:#fef3c7;border-left:4px solid #f59e0b;padding:12px;border-radius:8px;margin-bottom:14px}.dialogue-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}.speaker{min-width:110px;font-weight:700;color:var(--primary);font-size:13px;padding-top:6px}.bubble{flex:1;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;position:relative;cursor:pointer}.bubble .fr{font-size:15px;margin-bottom:6px}.bubble .en{font-size:13px;color:var(--muted);font-style:italic}.play{position:absolute;right:10px;top:10px;width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center}.controls{display:flex;gap:8px;justify-content:center;margin-top:14px}.btn{padding:8px 12px;border-radius:8px;border:none;background:var(--primary);color:#fff;cursor:pointer;font-weight:700}.questions{margin-top:16px;background:white;padding:12px;border-radius:10px;border:1px solid var(--border)}.q-item{padding:8px 0;border-bottom:1px solid #f1f5f9}.q-item:last-child{border-bottom:none}</style>
+</head>
+<body>
+<div class="header"><h1>Week 3 — Listening: La journée de Maman Rose</h1><p style="opacity:.9;margin:6px 0">A short mini-documentary — follow Rose at the market.</p></div>
+<div class="container">
+<div class="scene"><strong>Scene:</strong> A mini-documentary following Rose, a market seller in Bukavu, from morning to night.</div>
+
+<div class="dialogue-row"><div class="speaker">Narrateur</div><div class="bubble" onclick="speak(0,this)"><div class="fr">Voici Rose. Elle est vendeuse au grand marché de Bukavu.</div><div class="en">Here is Rose. She is a seller at the big market in Bukavu.</div><div class="play">▶</div></div></div>
+<div class="dialogue-row"><div class="speaker">Narrateur</div><div class="bubble" onclick="speak(1,this)"><div class="fr">Chaque jour, elle se réveille à cinq heures du matin.</div><div class="en">Every day, she wakes up at five in the morning.</div><div class="play">▶</div></div></div>
+<div class="dialogue-row"><div class="speaker">Rose</div><div class="bubble" onclick="speak(2,this)"><div class="fr">Je me lève, je me lave et je prends le petit-déjeuner avec mes enfants.</div><div class="en">I get up, I wash and I have breakfast with my children.</div><div class="play">▶</div></div></div>
+<div class="dialogue-row"><div class="speaker">Narrateur</div><div class="bubble" onclick="speak(3,this)"><div class="fr">À six heures et demie, elle va au marché à pied.</div><div class="en">At half past six, she goes to the market on foot.</div><div class="play">▶</div></div></div>
+<div class="dialogue-row"><div class="speaker">Rose</div><div class="bubble" onclick="speak(4,this)"><div class="fr">J'ai une petite boutique. Je vends des légumes et des fruits.</div><div class="en">I have a small shop. I sell vegetables and fruit.</div><div class="play">▶</div></div></div>
+<div class="dialogue-row"><div class="speaker">Narrateur</div><div class="bubble" onclick="speak(5,this)"><div class="fr">À midi, Rose déjeune au marché avec ses amies.</div><div class="en">At noon, Rose has lunch at the market with her friends.</div><div class="play">▶</div></div></div>
+<div class="dialogue-row"><div class="speaker">Rose</div><div class="bubble" onclick="speak(6,this)"><div class="fr">L'après-midi, je travaille encore. Je rentre à la maison à six heures du soir.</div><div class="en">In the afternoon, I work again. I go back home at six in the evening.</div><div class="play">▶</div></div></div>
+<div class="dialogue-row"><div class="speaker">Narrateur</div><div class="bubble" onclick="speak(7,this)"><div class="fr">Le soir, Rose dîne avec sa famille et elle écoute la radio.</div><div class="en">In the evening, Rose has dinner with her family and listens to the radio.</div><div class="play">▶</div></div></div>
+<div class="dialogue-row"><div class="speaker">Rose</div><div class="bubble" onclick="speak(8,this)"><div class="fr">Je me couche à neuf heures. Demain est un nouveau jour !</div><div class="en">I go to bed at nine. Tomorrow is a new day!</div><div class="play">▶</div></div></div>
+
+<div class="controls"><button class="btn" onclick="playAll()">Play All</button><button class="btn" onclick="stopAll()">Stop</button><select id="speed" onchange="updateSpeed()"><option value="0.85">0.85x</option><option value="1" selected>1x</option><option value="1.15">1.15x</option></select></div>
+
+<div class="questions"><h3 style="margin-top:0;color:#2563eb">Comprehension Questions</h3><div class="q-item">1. What is Rose's job? (Teacher / Market seller / Nurse)</div><div class="q-item">2. What time does she wake up? (5 a.m. / 6 a.m. / 7 a.m.)</div><div class="q-item">3. How does she go to the market? (By motorbike / By bus / On foot)</div><div class="q-item">4. What does she sell? (Clothes / Vegetables and fruit / Bread)</div><div class="q-item">5. What does she do in the evening? (Watches TV / Listens to the radio / Studies French)</div></div>
+</div>
+<script>
+const lines=[
+  "Voici Rose. Elle est vendeuse au grand marché de Bukavu.",
+  "Chaque jour, elle se réveille à cinq heures du matin.",
+  "Je me lève, je me lave et je prends le petit-déjeuner avec mes enfants.",
+  "À six heures et demie, elle va au marché à pied.",
+  "J'ai une petite boutique. Je vends des légumes et des fruits.",
+  "À midi, Rose déjeune au marché avec ses amies.",
+  "L'après-midi, je travaille encore. Je rentre à la maison à six heures du soir.",
+  "Le soir, Rose dîne avec sa famille et elle écoute la radio.",
+  "Je me couche à neuf heures. Demain est un nouveau jour !"
+];
+let playing=false,queue=[];
+function speak(i,el){stopAll();const u=new SpeechSynthesisUtterance(lines[i]);u.lang='fr-FR';u.rate=parseFloat(document.getElementById('speed').value);const voices=speechSynthesis.getVoices();const fr=voices.find(v=>v.lang&&v.lang.startsWith('fr'));if(fr)u.voice=fr;u.onstart=()=>el.classList.add('playing');u.onend=()=>el.classList.remove('playing');speechSynthesis.speak(u)}
+function playAll(){stopAll();playing=true;queue=lines.map((l,i)=>i);playNext()}
+function playNext(){if(!playing||queue.length===0){playing=false;return}const i=queue.shift();const b=document.querySelectorAll('.bubble')[i];const u=new SpeechSynthesisUtterance(lines[i]);u.lang='fr-FR';u.rate=parseFloat(document.getElementById('speed').value);const voices=speechSynthesis.getVoices();const fr=voices.find(v=>v.lang&&v.lang.startsWith('fr'));if(fr)u.voice=fr;u.onstart=()=>b.classList.add('playing');u.onend=()=>{b.classList.remove('playing');setTimeout(playNext,350)};speechSynthesis.speak(u)}
+function stopAll(){playing=false;queue=[];speechSynthesis.cancel();document.querySelectorAll('.bubble').forEach(b=>b.classList.remove('playing'))}
+speechSynthesis.getVoices();if(speechSynthesis.onvoiceschanged!==undefined)speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();
+</script>
+</body>
+</html>
