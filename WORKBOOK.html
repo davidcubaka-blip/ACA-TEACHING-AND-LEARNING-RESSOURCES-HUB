@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACA French Workbook — Interactive</title>
+<style>
+:root{--p:#1a5276;--s:#2874a6;--a:#f39c12;--b:#fefefe;--r:#fffef8;--d:#d5d8dc;--g:#27ae60;--x:#c0392b}
+*{box-sizing:border-box}body{margin:0;font-family:Segoe UI,system-ui,sans-serif;background:#eef2f5}
+.w{max-width:900px;margin:0 auto;background:var(--b);min-height:100vh;box-shadow:0 0 20px rgba(0,0,0,.08)}
+h{background:var(--p);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+h h1{margin:0;font-size:1rem;font-weight:600}h .u{font-size:.7rem;opacity:.85}
+.n{display:flex;gap:6px;align-items:center}
+.n button{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.8rem}
+.n button:disabled{opacity:.4;cursor:not-allowed}
+.n span{font-size:.75rem;font-weight:500;min-width:55px;text-align:center}
+.wn{display:flex;gap:5px;overflow-x:auto;padding:8px 18px;background:#f4f6f7;border-bottom:1px solid var(--d);scrollbar-width:thin}
+.wp{padding:5px 12px;border-radius:20px;border:1px solid var(--d);background:#fff;color:var(--s);font-size:.75rem;font-weight:500;cursor:pointer;white-space:nowrap}
+.wp.a{background:var(--p);color:#fff;border-color:var(--p)}
+.c{padding:22px 26px;background:var(--r);min-height:calc(100vh - 65px)}
+.c.h{display:none}
+.t{color:var(--p);font-size:1.05rem;font-weight:700;margin-bottom:14px;padding-bottom:7px;border-bottom:2px solid var(--a);display:inline-block}
+.l{color:var(--s);font-weight:600;font-size:.9rem;margin:16px 0 7px}
+.i{color:#5d6d7e;font-size:.85rem;margin-bottom:10px;font-style:italic}
+.wb{display:grid;grid-template-columns:1fr 1fr;gap:7px 18px;margin:10px 0}
+.wr{display:flex;align-items:center;gap:7px;padding:5px 8px;background:#f8f9fa;border-radius:6px;border:1px solid var(--d)}
+.wr .f{font-weight:600;color:var(--p);min-width:140px;font-size:.85rem}
+.wr input{flex:1;border:none;background:transparent;border-bottom:1px dashed #aab7b8;padding:3px 5px;font-size:.85rem;color:#2c3e50}
+.wr input:focus{outline:none;border-bottom:2px solid var(--a);background:#fff3e0}
+.e{background:#f4f6f7;border-left:4px solid var(--s);padding:11px 14px;margin:10px 0;border-radius:0 8px 8px 0}
+.eh{font-weight:600;color:var(--p);font-size:.85rem;margin-bottom:7px}
+.x{display:flex;align-items:baseline;gap:7px;margin:6px 0;flex-wrap:wrap}
+.x .m{color:var(--s);font-weight:700;min-width:20px}
+.x input.inl{border:none;border-bottom:1.5px solid #aab7b8;background:transparent;padding:3px 7px;min-width:65px;font-size:.85rem;color:#2c3e50}
+.x input.inl:focus{outline:none;border-bottom:2px solid var(--a);background:#fff3e0;border-radius:3px 3px 0 0}
+.x input.w{min-width:140px}
+.x input.f{min-width:100%;flex:1}
+.dia{background:#eaf2f8;border-radius:10px;padding:13px 16px;margin:10px 0}
+.dr{display:flex;gap:9px;margin:6px 0;align-items:flex-start}
+.ds{font-weight:700;color:var(--p);min-width:75px;font-size:.85rem}
+.dt{color:#2c3e50;font-size:.85rem;line-height:1.5;flex:1}
+.ta{width:100%;min-height:85px;border:1.5px solid var(--d);border-radius:8px;padding:10px;font-size:.85rem;font-family:inherit;resize:vertical;margin:7px 0;background:#fff}
+.ta:focus{outline:none;border-color:var(--a);box-shadow:0 0 0 3px rgba(243,156,18,.1)}
+.ta.s{min-height:40px}
+.ch{display:grid;grid-template-columns:1fr;gap:5px;margin:9px 0}
+.ci{display:flex;align-items:center;gap:9px;padding:6px 10px;background:#f8f9fa;border-radius:6px;border:1px solid var(--d);cursor:pointer}
+.ci:hover{background:#eaf2f8}
+.ci input{width:17px;height:17px;accent-color:var(--g);cursor:pointer}
+.ci label{flex:1;cursor:pointer;font-size:.85rem;color:#2c3e50}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 0}
+.sc{background:#f8f9fa;border:1px solid var(--d);border-radius:8px;padding:9px 11px}
+.sc label{display:block;font-size:.75rem;color:var(--s);font-weight:600;margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px}
+.sc input{width:100%;border:none;background:transparent;border-bottom:1px dashed #aab7b8;padding:3px 0;font-size:.85rem;color:#2c3e50}
+.sc input:focus{outline:none;border-bottom:2px solid var(--a)}
+.gt{width:100%;border-collapse:collapse;margin:10px 0;font-size:.85rem}
+.gt th{background:var(--p);color:#fff;padding:8px;text-align:left;font-weight:600}
+.gt td{padding:8px;border-bottom:1px solid var(--d);background:#fff}
+.gt tr:nth-child(even) td{background:#f8f9fa}
+.ce{text-align:center}
+@media(max-width:640px){.c{padding:14px 12px}.wb{grid-template-columns:1fr}.sg{grid-template-columns:1fr}h h1{font-size:.85rem}}
+</style>
+<base target="_blank">
+</head>
+<body>
+<div class="w">
+h><div><h1>ACA French Program — Student Workbook</h1><div class="u">Cahier interactif · 12 Weeks · Beginner → A2</div></div><div class="n"><button id="pb" onclick="P(-1)">← Prev</button><span id="pi">1 / 40</span><button id="nb" onclick="P(1)">Next →</button></div></h>
+<div class="wn" id="wn"></div>
+<div id="mc"></div>
+</div>
+<script>
+const LS=localStorage,SS='aca_workbook_';
+function SA(el){el.addEventListener('input',e=>{const t=e.target,k=t.dataset.s;if(k)LS.setItem(SS+k,t.type==='checkbox'?t.checked:t.value)})}
+function RL(){document.querySelectorAll('[data-s]').forEach(el=>{const v=LS.getItem(SS+el.dataset.s);if(v!==null){if(el.type==='checkbox')el.checked=v==='true';else el.value=v}})}
+function G(id){return document.getElementById(id)}
+let cp=1;
+const NP=40;
+
+const PG=['<div class="ce" style="padding:36px 18px"><h1 style="font-size:1.8rem;color:var(--p);margin-bottom:6px">ACA</h1><p style="font-size:.8rem;color:#5d6d7e;letter-spacing:2px;margin-bottom:18px">ANGLO CONGOLESE ASSOCIATION</p><h2 style="font-size:1.15rem;color:var(--s);margin-bottom:5px">Student Workbook</h2><p style="color:#7f8c8d;margin-bottom:22px">Cahier d\'exercices — French Language Program</p><div style="max-width:300px;margin:0 auto;text-align:left"><label style="font-size:.8rem;color:var(--p);font-weight:600">Name / Nom :</label><input type="text" class="ta s" data-s="sn" placeholder="Write your name here..."><div style="display:flex;gap:10px;font-size:.75rem;color:#5d6d7e;margin-top:7px"><span>📅 12-Week Curriculum</span><span>📈 Beginner → A2</span></div><div style="display:flex;gap:10px;font-size:.75rem;color:#5d6d7e;margin-top:5px"><span>🕐 3 Days/Week · 2 Hours/Day</span><span>📝 40 pages</span></div></div><p style="margin-top:32px;font-size:.8rem;color:var(--a);font-weight:600">EMPOWERING YOUTH · TRANSFORMING COMMUNITIES</p></div>','<div class="t">Welcome, Student! — Bienvenue !</div><p class="i">This workbook is YOURS. Write in it, make mistakes in it, fill it with your progress.</p><div class="l">How it works</div><p style="font-size:.85rem;color:#2c3e50;line-height:1.6">Every week has three pages: <strong>Page A — My words</strong> (practise the 20 words), <strong>Page B — Grammar in action</strong> (summary + exercises), <strong>Page C — Speak & check</strong> (dialogue + self-assessment).</p><div class="l">Your tools</div><p style="font-size:.85rem;color:#2c3e50;line-height:1.6">Flashcards — 20 per week. Practise 10 minutes every day.<br>The Resource Hub — open index.html on any phone or computer.<br>Your voice — record yourself on your phone each week and listen.</p><div class="l">Rules for success</div><div class="ch"><div class="ci"><input type="checkbox" id="r1" data-s="r1"><label for="r1">Come to every session — 3 days a week, 2 hours a day.</label></div><div class="ci"><input type="checkbox" id="r2" data-s="r2"><label for="r2">Speak French in class, even badly — mistakes are how we learn.</label></div><div class="ci"><input type="checkbox" id="r3" data-s="r3"><label for="r3">Do the homework. It is short but it matters.</label></div><div class="ci"><input type="checkbox" id="r4" data-s="r4"><label for="r4">Learn the cards BEFORE the grammar page — it makes everything easier.</label></div></div>','<div class="t">My 12-Week Map</div><p class="i">Colour or tick each week when you finish it. Watch yourself move from Débutant to A2!</p><div class="ch"><div class="ci"><input type="checkbox" id="wm1" data-s="wm1"><label for="wm1"><strong>Week 1</strong> — Introductions · The verb ÊTRE</label></div><div class="ci"><input type="checkbox" id="wm2" data-s="wm2"><label for="wm2"><strong>Week 2</strong> — Personal Information · Articles</label></div><div class="ci"><input type="checkbox" id="wm3" data-s="wm3"><label for="wm3"><strong>Week 3</strong> — Daily Routine · AVOIR and ALLER</label></div><div class="ci"><input type="checkbox" id="wm4" data-s="wm4"><label for="wm4"><strong>Week 4</strong> — Food & Shopping · The partitive</label></div><div class="ci"><input type="checkbox" id="wm5" data-s="wm5"><label for="wm5"><strong>Week 5</strong> — Directions · Prepositions of place</label></div><div class="ci"><input type="checkbox" id="wm6" data-s="wm6"><label for="wm6"><strong>Week 6</strong> — Family · Adjectives and agreement</label></div><div class="ci"><input type="checkbox" id="wm7" data-s="wm7"><label for="wm7"><strong>Week 7</strong> — Past Events · Le passé composé</label></div><div class="ci"><input type="checkbox" id="wm8" data-s="wm8"><label for="wm8"><strong>Week 8</strong> — Work · Review: être, avoir, aller + professions</label></div><div class="ci"><input type="checkbox" id="wm9" data-s="wm9"><label for="wm9"><strong>Week 9</strong> — Future Plans · Le futur proche</label></div><div class="ci"><input type="checkbox" id="wm10" data-s="wm10"><label for="wm10"><strong>Week 10</strong> — Problem Solving · Survival expressions</label></div><div class="ci"><input type="checkbox" id="wm11" data-s="wm11"><label for="wm11"><strong>Week 11</strong> — Opinions · Opinion structures</label></div><div class="ci"><input type="checkbox" id="wm12" data-s="wm12"><label for="wm12"><strong>Week 12</strong> — Review & Real Conversation · Full review of Weeks 1–11</label></div></div><p style="margin-top:12px;font-size:.8rem;color:var(--p);font-weight:600">Final goal: Week 12 — a real conversation in French. Bon courage !</p>','<div class="t">Week 1 · Page A — My words (Se présenter)</div><p class="i">Copy the English translation from memory. Use your flashcards to check.</p><input type="text" class="ta s" data-s="w1a_dt" placeholder="Date: _______________"><div class="wb"><div class="wr"><span class="f">Bonjour</span><input data-s="w1a_1" placeholder="English..."></div><div class="wr"><span class="f">Salut</span><input data-s="w1a_2" placeholder="English..."></div><div class="wr"><span class="f">Au revoir</span><input data-s="w1a_3" placeholder="English..."></div><div class="wr"><span class="f">À bientôt</span><input data-s="w1a_4" placeholder="English..."></div><div class="wr"><span class="f">Merci (beaucoup)</span><input data-s="w1a_5" placeholder="English..."></div><div class="wr"><span class="f">S'il vous plaît</span><input data-s="w1a_6" placeholder="English..."></div><div class="wr"><span class="f">Comment ça va ?</span><input data-s="w1a_7" placeholder="English..."></div><div class="wr"><span class="f">Ça va bien, merci</span><input data-s="w1a_8" placeholder="English..."></div><div class="wr"><span class="f">Je m'appelle...</span><input data-s="w1a_9" placeholder="English..."></div><div class="wr"><span class="f">Comment tu t'appelles ?</span><input data-s="w1a_10" placeholder="English..."></div><div class="wr"><span class="f">Monsieur (M.)</span><input data-s="w1a_11" placeholder="English..."></div><div class="wr"><span class="f">Madame (Mme)</span><input data-s="w1a_12" placeholder="English..."></div><div class="wr"><span class="f">Je suis...</span><input data-s="w1a_13" placeholder="English..."></div><div class="wr"><span class="f">la RDC</span><input data-s="w1a_14" placeholder="English..."></div><div class="wr"><span class="f">le Congo-Brazzaville</span><input data-s="w1a_15" placeholder="English..."></div><div class="wr"><span class="f">la Belgique</span><input data-s="w1a_16" placeholder="English..."></div><div class="wr"><span class="f">Bonsoir</span><input data-s="w1a_17" placeholder="English..."></div><div class="wr"><span class="f">Oui / Non</span><input data-s="w1a_18" placeholder="English..."></div></div><div class="l">Five favourite words — write a true sentence about yourself with each</div><textarea class="ta" data-s="w1a_f1" placeholder="1."></textarea><textarea class="ta" data-s="w1a_f2" placeholder="2."></textarea><textarea class="ta" data-s="w1a_f3" placeholder="3."></textarea><textarea class="ta" data-s="w1a_f4" placeholder="4."></textarea><textarea class="ta" data-s="w1a_f5" placeholder="5."></textarea>',
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+];
+
+function R(){
+  G('mc').innerHTML='<div class="c" id="p'+cp+'">'+PG[cp-1]+'</div>';
+  G('pi').textContent=cp+' / '+NP;
+  G('pb').disabled=cp===1;
+  G('nb').disabled=cp===NP;
+  document.querySelectorAll('.wp').forEach((b,i)=>b.classList.toggle('a',i+1===cp));
+  RL();
+  document.querySelectorAll('#p'+cp+' [data-s]').forEach(SA);
+}
+
+function P(d){
+  if((d<0&&cp>1)||(d>0&&cp<NP)){cp+=d;R();window.scrollTo(0,0);}
+}
+
+// Build week nav
+const wn=G('wn');
+const labs=['Cover','Welcome','Map'];
+for(let i=1;i<=12;i++){labs.push('W'+i+'A','W'+i+'B','W'+i+'C');}
+labs.push('Passport');
+for(let i=0;i<NP;i++){
+  const b=document.createElement('button');
+  b.className='wp';
+  b.textContent=labs[i];
+  b.onclick=()=>{cp=i+1;R();};
+  wn.appendChild(b);
+}
+
+// Keyboard nav
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowLeft')P(-1);
+  if(e.key==='ArrowRight')P(1);
+});
+
+R();
+</script>
+</body>
+</html>
